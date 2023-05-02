@@ -164,7 +164,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(177, 35);
             this.label1.TabIndex = 71;
-            this.label1.Text = "To Date:";
+            this.label1.Text = "End Date:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // dtToDate
@@ -198,7 +198,7 @@
             this.lblToStore.Name = "lblToStore";
             this.lblToStore.Size = new System.Drawing.Size(177, 35);
             this.lblToStore.TabIndex = 63;
-            this.lblToStore.Text = "From Date:";
+            this.lblToStore.Text = "Start Date:";
             this.lblToStore.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnInquiry

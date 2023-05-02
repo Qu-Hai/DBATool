@@ -57,27 +57,22 @@ namespace DBATool
         {
 
 
-            if (DateTime.Parse(dtFromDate.Value.ToString("MM-dd-yyyy")).AddDays(31) < DateTime.Parse(dtToDate.Value.ToString("MM-dd-yyyy")))
-            {
-                MessageBox.Show("You only can select data in 31 days!");
-                dtToDate.Value = toDate;
-                dtFromDate.Value = fromDate;
-            }
-            fromDate = DateTime.Parse(dtFromDate.Value.ToString("MM-dd-yyyy"));
-            toDate = DateTime.Parse(dtToDate.Value.ToString("MM-dd-yyyy"));
+            
+            //fromDate = DateTime.Parse(dtFromDate.Value.ToString("MM-dd-yyyy"));
+            //toDate = DateTime.Parse(dtToDate.Value.ToString("MM-dd-yyyy"));
 
         }
 
         private void dtToDate_ValueChanged(object sender, EventArgs e)
         {
-            if (DateTime.Parse(dtFromDate.Value.ToString("MM-dd-yyyy")).AddDays(31) < DateTime.Parse(dtToDate.Value.ToString("MM-dd-yyyy")))
-            {
-                MessageBox.Show("You only can select data in 31 days!");
-                dtToDate.Value = toDate;
-                dtFromDate.Value = fromDate;
-            }
-            fromDate = DateTime.Parse(dtFromDate.Value.ToString("MM-dd-yyyy"));
-            toDate = DateTime.Parse(dtToDate.Value.ToString("MM-dd-yyyy"));
+            //if (DateTime.Parse(dtFromDate.Value.ToString("MM-dd-yyyy")).AddDays(31) < DateTime.Parse(dtToDate.Value.ToString("MM-dd-yyyy")))
+            //{
+            //    MessageBox.Show("You only can select data in 31 days!");
+            //    dtToDate.Value = toDate;
+            //    dtFromDate.Value = fromDate;
+            //}
+            //fromDate = DateTime.Parse(dtFromDate.Value.ToString("MM-dd-yyyy"));
+            //toDate = DateTime.Parse(dtToDate.Value.ToString("MM-dd-yyyy"));
         }
         private int CalculateDateTime(DateTime fromDate, DateTime toDate)
         {
@@ -110,8 +105,19 @@ namespace DBATool
 
         private void btnInquiry_Click(object sender, EventArgs e)
         {
-
-            Inquiry();
+            if (DateTime.Parse(dtFromDate.Value.ToString("MM-dd-yyyy")).AddDays(31) < DateTime.Parse(dtToDate.Value.ToString("MM-dd-yyyy")))
+            {
+                MessageBox.Show("You only can select data in 31 days!");
+                //dtToDate.Value = toDate;
+                //dtFromDate.Value = fromDate;
+            }
+            else if (DateTime.Parse(dtToDate.Value.ToString("MM-dd-yyyy")) < DateTime.Parse(dtFromDate.Value.ToString("MM-dd-yyyy"))) {
+                MessageBox.Show("Start Date must be prior to End Date!");
+            }
+            else
+            {
+                Inquiry();
+            }
         }
 
         private void CreateDb()
@@ -324,7 +330,7 @@ namespace DBATool
         private void dgvDataTransaction_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = e.ColumnIndex;
-            if (e.RowIndex == -1 && index > 0)
+            if (e.RowIndex == -1 && index > 0 && transactions.Count > 0)
             {
 
                 isSortAscending = !isSortAscending;
@@ -333,7 +339,7 @@ namespace DBATool
                 cbAll.Checked = false;
                 CheckAll((bool)cbAll.Checked);
             }
-            else if (e.RowIndex != -1 && index == 9)
+            else if (e.RowIndex != -1 && index == 9 && transactions.Count > 0)
             {
                 string transact = dgvDataTransaction.Rows[e.RowIndex].Cells[1].Value.ToString();
                 string netTotal = dgvDataTransaction.Rows[e.RowIndex].Cells[3].Value.ToString();
